@@ -66,8 +66,9 @@ public class Main {
                     for (int i = 0; i < contadorLibros; i++) {
                         Libro libro = libros[i];
                         if ((criterio.equalsIgnoreCase("titulo") && libro.getTitulo().equalsIgnoreCase(valor)) ||
-                            (criterio.equalsIgnoreCase("autor") && libro.getAutor().equalsIgnoreCase(valor)) ||
-                            (criterio.equalsIgnoreCase("categoria") && libro.getCategoria().equalsIgnoreCase(valor))) {
+                                (criterio.equalsIgnoreCase("autor") && libro.getAutor().equalsIgnoreCase(valor)) ||
+                                (criterio.equalsIgnoreCase("categoria")
+                                        && libro.getCategoria().equalsIgnoreCase(valor))) {
                             System.out.println(libro);
                             libroEncontrado = true;
                         }
