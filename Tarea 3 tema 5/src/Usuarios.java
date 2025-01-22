@@ -4,10 +4,14 @@ import java.util.List;
 class Usuario { // Variables para Usuarios
     private String nombre;
     private String id;
+    private String contraseña;
+    private String rol;
 
     public void Usuarios(String titulo, String autor, String categoria) {// Constructor parametrizar
         this.nombre = nombre;
         this.id = id;
+        this.contraseña = contraseña;
+        this.rol = rol;
     }
 
     // Get and Set
@@ -26,6 +30,31 @@ class Usuario { // Variables para Usuarios
 
     public void setId(String id) {
         this.id = id;
+    }
+
+
+    public String getContraseña() {
+        return this.contraseña;
+    }
+
+    public void setContraseña(String contraseña) {
+        this.contraseña = contraseña;
+    }
+
+    public String getRol() {
+        return this.rol;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
+    }
+
+    public List<Usuario> getUsuarios() {
+        return this.usuarios;
+    }
+
+    public void setUsuarios(List<Usuario> usuarios) {
+        this.usuarios = usuarios;
     }
 
     @Override
