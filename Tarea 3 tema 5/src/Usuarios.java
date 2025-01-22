@@ -1,14 +1,17 @@
- class Usuarios { //Variables para Usuarios
-        private String nombre;
-        private String id;
- 
-     public void Usuarios (String titulo, String autor, String categoria) {//Constructor parametrizar
-     
-         this.nombre=nombre;
-         this.id=id;
-     }
- 
-        //Get and Set 
+import java.util.ArrayList;
+import java.util.List;
+
+class Usuario { // Variables para Usuarios
+    private String nombre;
+    private String id;
+
+    public void Usuarios(String titulo, String autor, String categoria) {// Constructor parametrizar
+
+        this.nombre = nombre;
+        this.id = id;
+    }
+
+    // Get and Set
 
     public String getNombre() {
         return this.nombre;
@@ -26,23 +29,28 @@
         this.id = id;
     }
 
- 
-     @Override
-     public String toString() {
-         return "Nombre" + nombre + ", Id" + id ;
-     }
+    @Override
+    public String toString() {
+        return "Nombre" + nombre + ", Id" + id;
+    }
 
+    // Funciones
 
-     //Funciones
+private List<Usuario> usuarios = new ArrayList<>();
+   
+public void registrarUsuario(String nombre, String id) {
+    usuarios.add(new Usuario());
+    System.out.println("Usuario registrado correctamente.");
+}
 
-     public static void registrarusuarios () {
-        
-     }
+public void consultarInformacion() {
+    if (usuarios.isEmpty()) {
+        System.out.println("No hay usuarios registrados.");
+    } else {
+        for (Usuario usuario : usuarios) {
+            System.out.println(usuario);
+        }
+    }
 
-     public static void consultarinformacion () {
-        
-     }
-
- }
-    
-
+}
+}

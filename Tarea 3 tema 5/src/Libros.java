@@ -1,22 +1,18 @@
 import java.util.ArrayList;
 import java.util.List;
 
-class Libro { //Variables para Libro
-     private String titulo;
-     private String autor;
-     private String categoria;
-     
- 
-     public void Libro (String titulo, String autor, String categoria) {//Constructor parametrizar
-     
-         this.titulo=titulo;
-         this.autor=autor;
-         this.categoria=categoria;
+class Libro { // Variables para Libro
+    private String titulo;
+    private String autor;
+    private String categoria;
 
-     }
+    public void Libro(String titulo, String autor, String categoria) {// Constructor parametrizar
+        this.titulo = titulo;
+        this.autor = autor;
+        this.categoria = categoria;
+    }
 
-    //Get and Set 
-
+    // Get and Set
 
     public String getTitulo() {
         return this.titulo;
@@ -42,32 +38,41 @@ class Libro { //Variables para Libro
         this.categoria = categoria;
     }
 
- 
-     @Override
-     public String toString() {
-         return "Titulo" + titulo + ", Autor" + autor + ", Categotia" + categoria;
-     }
+    @Override
+    public String toString() {
+        return "Titulo" + titulo + ", Autor" + autor + ", Categotia" + categoria;
+    }
 
-     //Funciones
+    // Funciones
+    List<Libro> libros = new ArrayList<>();
 
-     private List libros = new ArrayList<>();
-     private List usuarios = new ArrayList<>();
-     
-     public String agregarlibrosnuevos() {
-        libros.add (new Libro (titulo, autor, categoria));
+    public void agregarLibro(String titulo, String autor, String categoria) {
+        libros.add(new Libro());
+        System.out.println("Libro agregado correctamente.");
+    }
 
-     }
+    public void eliminarLibro(String titulo) {
+        libros.removeIf(libro -> libro.titulo.equalsIgnoreCase(titulo));
+        System.out.println("Libro eliminado si existía.");
+    }
 
-     public  String eliminarlibrosexistentes() {
-        libros.removeIf (libro -> libro.titulo.equalsIgnoreCase(libro));
-        
-     }
+    public void buscarLibro(String criterio, String valor) {
+        for (Libro libro : libros) {
+            if ((criterio.equalsIgnoreCase("titulo") && libro.titulo.equalsIgnoreCase(valor)) ||
+                    (criterio.equalsIgnoreCase("autor") && libro.autor.equalsIgnoreCase(valor)) ||
+                    (criterio.equalsIgnoreCase("categoria") && libro.categoria.equalsIgnoreCase(valor))) {
+                System.out.println(libro);
+            }
+        }
+    }
 
-     public static void buscarlibros() {
-        
-     }
-
-     public static void mostrardisponibles() {
-        
-     }
+    public void mostrarLibros() {
+        if (libros.isEmpty()) {
+            System.out.println("No hay libros disponibles.");
+        } else {
+            for (Libro libro : libros) {
+                System.out.println(libro);
+            }
+        }
+    }
 }
