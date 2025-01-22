@@ -90,18 +90,7 @@ public class Prestados {
             }
             return false;
         }
-    }
-
-    static class Libro {
-        String titulo;
-        boolean prestado;
-
-        public Libro(String titulo) {
-            this.titulo = titulo;
-            this.prestado = false;
-        }
-    }
-    
+    }    
 }
 
 

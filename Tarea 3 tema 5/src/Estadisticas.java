@@ -44,5 +44,5 @@ public class Estadisticas {
         this.usuariomasactivo = usuariomasactivo;
     }
 
-    
+
 }
