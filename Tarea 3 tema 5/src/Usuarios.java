@@ -6,7 +6,6 @@ class Usuario { // Variables para Usuarios
     private String id;
 
     public void Usuarios(String titulo, String autor, String categoria) {// Constructor parametrizar
-
         this.nombre = nombre;
         this.id = id;
     }
