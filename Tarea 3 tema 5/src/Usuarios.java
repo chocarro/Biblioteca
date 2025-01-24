@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 class Usuario { // Variables para Usuarios
-    private String nombre;
+    String nombre;
     private String id;
 
     public void Usuarios(String titulo, String autor, String categoria) {// Constructor parametrizar
@@ -37,6 +37,8 @@ class Usuario { // Variables para Usuarios
     // Funciones
 
 private List<Usuario> usuarios = new ArrayList<>();
+public int numeroPrestamos;
+public String[] prestamosActivos;
    
 public void registrarUsuario(String nombre, String id) {
     usuarios.add(new Usuario());
