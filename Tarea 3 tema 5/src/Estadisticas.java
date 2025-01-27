@@ -23,7 +23,6 @@ public class Estadisticas {
                 "}";
         }
     
-    
         public int getLibrostotalesyactivos() {
             return this.librostotalesyactivos;
         }

@@ -43,8 +43,7 @@ public class Main {
         }
 
         // Menú interactivo según el rol del usuario
-     
-        
+    
         do {
             System.out.println("\n=== Menú de Gestión ===");
             if (usuarioLogueado.getRol().equals("admin")) {
