@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.List;
 
 class Usuario { // Variables para Usuarios
@@ -6,12 +5,16 @@ class Usuario { // Variables para Usuarios
     private String id;
     private String contraseña;
     private String rol;
+    private List<Libro> librosPrestados;
+    public int numeroPrestamos;
+    public String[] prestamosActivos;
 
-    public void Usuarios(String titulo, String autor, String categoria) {// Constructor parametrizar
+    public  Usuario(String nombre, String id, String contraseña, String rol, List<Libro> librosPrestados) {// Constructor parametrizar
         this.nombre = nombre;
         this.id = id;
         this.contraseña = contraseña;
         this.rol = rol;
+        this.librosPrestados=librosPrestados;
     }
 
     // Get and Set
@@ -32,7 +35,6 @@ class Usuario { // Variables para Usuarios
         this.id = id;
     }
 
-
     public String getContraseña() {
         return this.contraseña;
     }
@@ -49,12 +51,12 @@ class Usuario { // Variables para Usuarios
         this.rol = rol;
     }
 
-    public List<Usuario> getUsuarios() {
-        return this.usuarios;
+    public List<Libro> getLibrosPrestados() {
+        return librosPrestados;
     }
 
-    public void setUsuarios(List<Usuario> usuarios) {
-        this.usuarios = usuarios;
+    public void setLibrosPrestados(List<Libro> librosPrestados) {
+        this.librosPrestados = librosPrestados;
     }
 
     @Override
@@ -62,25 +64,14 @@ class Usuario { // Variables para Usuarios
         return "Nombre" + nombre + ", Id" + id;
     }
 
-    // Funciones
-
-private List<Usuario> usuarios = new ArrayList<>();
-public int numeroPrestamos;
-public String[] prestamosActivos;
-   
-public void registrarUsuario(String nombre, String id) {
-    usuarios.add(new Usuario());
-    System.out.println("Usuario registrado correctamente.");
-}
-
-public void consultarInformacion() {
-    if (usuarios.isEmpty()) {
-        System.out.println("No hay usuarios registrados.");
-    } else {
-        for (Usuario usuario : usuarios) {
-            System.out.println(usuario);
-        }
+    public void agregarLibroPrestados(Libro libro) {
+        librosPrestados.add(libro);
+        System.out.println("Libro agregado correctamente.");
     }
 
-}
+    public void eliminarLibroPrestados(Libro libro) {
+        librosPrestados.remove(libro);
+        System.out.println("Libro eliminado si existía.");
+    }
+
 }

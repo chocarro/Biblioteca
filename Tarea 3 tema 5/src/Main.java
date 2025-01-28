@@ -5,19 +5,22 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         // Arrays para almacenar libros y usuarios
-        Libro[] libros = new Libro[100];
-        Usuario[] usuarios = new Usuario[50];
-        int contadorLibros = 0;
-        int contadorUsuarios = 0;
-
+        Biblioteca biblioteca = new Biblioteca();
         int opcion;
 
-        // Crear usuarios y libros de prueba
-        usuarios[0] = new Usuario();
-        usuarios[1] = new Usuario();
+        Usuario usuario = new Usuario("Pepe", "1234", "1234", "usuario", null);
+        Usuario admin = new Usuario("Maria", "4321", "4321", "admin", null);
 
-        libros[0] = new Libro();
-        libros[1] = new Libro();
+        Libro prueba1 = new Libro("Prueba1", "Pepe", "Terror", false);
+        Libro prueba2 = new Libro("Prueba2", " Maria", "Fantasia", false);
+        Libro prueba3 = new Libro("Prueba3", " Elena", "Amor", false);
+
+        biblioteca.agregarLibro(prueba1);
+        biblioteca.agregarLibro(prueba2);
+        biblioteca.agregarLibro(prueba3);
+
+        biblioteca.registrarUsuario(usuario);
+        biblioteca.registrarUsuario(admin);
 
         Usuario usuarioLogueado = null;
 
@@ -29,9 +32,10 @@ public class Main {
             System.out.print("Ingrese su contraseña: ");
             String contraseña = scanner.nextLine();
 
-            for (Usuario usuario : usuarios) {
-                if (usuario != null && usuario.getNombre().equals(nombreUsuario) && usuario.getContraseña().equals(contraseña)) {
-                    usuarioLogueado = usuario;
+            for (Usuario usuario1 : biblioteca.getUsuarios()) {
+                if (usuario1 != null && usuario1.getNombre().equals(nombreUsuario)
+                        && usuario1.getContraseña().equals(contraseña)) {
+                    usuarioLogueado = usuario1;
                     System.out.println("Inicio de sesión exitoso. Bienvenido, " + usuarioLogueado.getNombre() + "!");
                     break;
                 }
@@ -43,7 +47,7 @@ public class Main {
         }
 
         // Menú interactivo según el rol del usuario
-    
+
         do {
             System.out.println("\n=== Menú de Gestión ===");
             if (usuarioLogueado.getRol().equals("admin")) {
@@ -58,112 +62,93 @@ public class Main {
             }
             System.out.println("0. Salir");
             System.out.print("Seleccione una opción: ");
-            opcion = scanner.nextInt();
+            opcion = Integer.parseInt(scanner.nextLine());
             scanner.nextLine(); // Consumir la nueva línea
 
             switch (opcion) {
                 case 1:
                     if (usuarioLogueado.getRol().equals("admin")) {
                         // Agregar libro
-                        if (contadorLibros < libros.length) {
-                            System.out.print("Ingrese título: ");
-                            String titulo = scanner.nextLine();
-                            System.out.print("Ingrese autor: ");
-                            String autor = scanner.nextLine();
-                            System.out.print("Ingrese categoría: ");
-                            String categoria = scanner.nextLine();
-                            libros[contadorLibros++] = new Libro();
-                            System.out.println("Libro agregado correctamente.");
-                        } else {
-                            System.out.println("No se pueden agregar más libros. Capacidad llena.");
-                        }
+
+                        System.out.print("Ingrese título: ");
+                        String titulo = scanner.nextLine();
+                        System.out.print("Ingrese autor: ");
+                        String autor = scanner.nextLine();
+                        System.out.print("Ingrese categoría: ");
+                        String categoria = scanner.nextLine();
+                        Libro nuevoLibro = new Libro(titulo, autor, categoria, false);
+                        biblioteca.agregarLibro(nuevoLibro);
+                        System.out.println("Libro agregado correctamente.");
+
                     } else if (usuarioLogueado.getRol().equals("usuario")) {
                         // Buscar libro
-                        System.out.print("Ingrese el título del libro a buscar: ");
-                        String tituloBuscar = scanner.nextLine();
-                        boolean encontrado = false;
-                        for (int i = 0; i < contadorLibros; i++) {
-                            if (libros[i].getTitulo().equalsIgnoreCase(tituloBuscar)) {
-                                System.out.println(libros[i]);
-                                encontrado = true;
+                        System.out.print("¿Porque cual criterio quieres buscar? ");
+                        System.out.print("1.titulo");
+                        System.out.print("2.categoria");
+                        System.out.print("3.autor");
+
+                        int opcion1 = Integer.parseInt(scanner.nextLine());
+                        switch (opcion1) {
+                            case 1:
+                                System.out.print("Escribe el titulo del libro");
+                                String titulo = scanner.nextLine();
+                                biblioteca.buscarLibro("titulo", titulo);
+
                                 break;
-                            }
+                            case 2:
+                                System.out.print("Escribe la categoria del libro");
+                                String categoria = scanner.nextLine();
+                                biblioteca.buscarLibro("categoria", categoria);
+                                break;
+                            case 3:
+                                System.out.print("Escribe el autor del libro");
+                                String autor = scanner.nextLine();
+                                biblioteca.buscarLibro("autor", autor);
+                                break;
+
+                            default:
+                                break;
                         }
-                        if (!encontrado) {
-                            System.out.println("Libro no encontrado.");
-                        }
+
                     }
                     break;
+                    
                 case 2:
                     if (usuarioLogueado.getRol().equals("admin")) {
                         // Eliminar libro
-                        System.out.print("Ingrese título del libro a eliminar: ");
-                        String tituloEliminar = scanner.nextLine();
-                        boolean eliminado = false;
-                        for (int i = 0; i < contadorLibros; i++) {
-                            if (libros[i].getTitulo().equalsIgnoreCase(tituloEliminar)) {
-                                libros[i] = libros[--contadorLibros];
-                                libros[contadorLibros] = null;
-                                System.out.println("Libro eliminado correctamente.");
-                                eliminado = true;
-                                break;
-                            }
-                        }
-                        if (!eliminado) {
-                            System.out.println("Libro no encontrado.");
-                        }
+                        System.out.print("Escribe el titulo del libro");
+                                String titulo = scanner.nextLine();
+                                Libro libroEliminar= biblioteca.buscarLibro("titulo", titulo);
+                                biblioteca.eliminarLibro(libroEliminar);
+
                     } else if (usuarioLogueado.getRol().equals("usuario")) {
                         // Mostrar todos los libros
-                        if (contadorLibros == 0) {
-                            System.out.println("No hay libros disponibles.");
-                        } else {
-                            for (int i = 0; i < contadorLibros; i++) {
-                                System.out.println(libros[i]);
-                            }
-                        }
+                       biblioteca.mostrarLibros();
                     }
                     break;
                 case 3:
                     if (usuarioLogueado.getRol().equals("admin")) {
                         // Mostrar todos los libros
-                        if (contadorLibros == 0) {
-                            System.out.println("No hay libros disponibles.");
-                        } else {
-                            for (int i = 0; i < contadorLibros; i++) {
-                                System.out.println(libros[i]);
-                            }
-                        }
+                       biblioteca.mostrarLibros();
                     }
                     break;
                 case 4:
                     if (usuarioLogueado.getRol().equals("admin")) {
                         // Registrar usuario
-                        if (contadorUsuarios < usuarios.length) {
-                            System.out.print("Ingrese nombre del usuario: ");
-                            String nombre = scanner.nextLine();
-                            System.out.print("Ingrese ID del usuario: ");
-                            String id = scanner.nextLine();
-                            System.out.print("Ingrese contraseña: ");
-                            String contraseña = scanner.nextLine();
-                            System.out.print("Ingrese rol (admin/usuario): ");
-                            String rol = scanner.nextLine();
-                            usuarios[contadorUsuarios++] = new Usuario();
-                            System.out.println("Usuario registrado correctamente.");
-                        } else {
-                            System.out.println("No se pueden registrar más usuarios. Capacidad llena.");
-                        }
+                        System.out.print("Ingrese nombre: ");
+                        String nombre = scanner.nextLine();
+                        System.out.print("Ingrese identificador: ");
+                        String identificador = scanner.nextLine();
+                        System.out.print("Ingrese contraseña: ");
+                        String contraseña = scanner.nextLine();
+                        Usuario nuevoUsuario= new Usuario(nombre, identificador, contraseña, "usuario", null);
+                        biblioteca.registrarUsuario(nuevoUsuario);
                     }
                     break;
                 case 5:
                     if (usuarioLogueado.getRol().equals("admin")) {
                         // Mostrar usuarios registrados
-                        if (contadorUsuarios == 0) {
-                            System.out.println("No hay usuarios registrados.");
-                        } else {
-                            for (int i = 0; i < contadorUsuarios; i++) {
-                                System.out.println(usuarios[i]);
-                            }
-                        }
+                        biblioteca.consultarInformacion();
                     }
                     break;
                 case 0:
@@ -173,7 +158,7 @@ public class Main {
                     System.out.println("Opción inválida. Intente nuevamente.");
             }
         } while (opcion != 0);
- 
+
     }
 
 }
