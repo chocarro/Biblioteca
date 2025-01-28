@@ -6,6 +6,8 @@ class Usuario { // Variables para Usuarios
     private String contraseña;
     private String rol;
     private List<Libro> librosPrestados;
+    public int numeroPrestamos;
+    public String[] prestamosActivos;
 
     public  Usuario(String nombre, String id, String contraseña, String rol, List<Libro> librosPrestados) {// Constructor parametrizar
         this.nombre = nombre;

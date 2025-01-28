@@ -62,7 +62,7 @@ public class Main {
             }
             System.out.println("0. Salir");
             System.out.print("Seleccione una opción: ");
-            opcion = scanner.nextInt();
+            opcion = Integer.parseInt(scanner.nextLine());
             scanner.nextLine(); // Consumir la nueva línea
 
             switch (opcion) {
@@ -87,7 +87,7 @@ public class Main {
                         System.out.print("2.categoria");
                         System.out.print("3.autor");
 
-                        int opcion1 = scanner.nextInt();
+                        int opcion1 = Integer.parseInt(scanner.nextLine());
                         switch (opcion1) {
                             case 1:
                                 System.out.print("Escribe el titulo del libro");

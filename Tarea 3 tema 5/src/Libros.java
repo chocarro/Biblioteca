@@ -1,6 +1,3 @@
-import java.util.ArrayList;
-import java.util.List;
-
 class Libro { // Variables para Libro
     private String titulo;
     private String autor;
